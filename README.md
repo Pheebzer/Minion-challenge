@@ -75,9 +75,9 @@ node2: Machine booted and ready!
 
 I dont want to ssh into every box to install and configure salt, because i think that would destroy the whole point of this exercise.
 
-Here's where [provisionin](https://www.vagrantup.com/docs/provisioning/) comes in.
+Here's where [provisioning](https://www.vagrantup.com/docs/provisioning/) comes in.
 
-Since all i need to do is run a few commands, i'll be using a bash-script that [runs upon box-deployment](https://www.vagrantup.com/docs/provisioning/shell.html#external-script) to install and configure salt.
+I'used a bash-script that [runs upon box-deployment](https://www.vagrantup.com/docs/provisioning/shell.html#external-script) to install and configure salt.
 
 ```
 $ cat Vagrantfile
@@ -138,7 +138,7 @@ vagrant.vm
 Unaccepted Keys:
 Rejected Keys:
 ```
-[Reading the documentation](https://www.vagrantup.com/docs/vagrantfile/machine_settings.html) reveals that you can --unsuprisingly-- change the hostname:
+[Reading the documentation](https://www.vagrantup.com/docs/vagrantfile/machine_settings.html) reveals that you can (unsuprisingly) change the hostname:
 
 ```
 # -*- mode: ruby -*-
@@ -162,7 +162,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", path: "salter.sh"
 end
 ```
-Master should now have 3 different, viable keys waiting for acceptance:
+Master should now have 3 different, viable keys waiting to be accepted:
 ```
 master$ sudo salt-key -A
 
@@ -200,7 +200,7 @@ end
 
 I got to 24th node before my system froze up. I decided to take a different approach: because the **minimum** RAM needed to run ubuntu without a GUI is 128MB, i decided to try capping the RAM usage there. After 20 minutes of waiting, not a single machine had managed to boot up. I then slowly increased the cap, until the boot-up times became bearable. 
 
-I ended up going with 250MB of RAM per box:
+4 boxes delpoyed succesfully in a reasonable time with 250MB.
 ```
 $ sudo salt "*" test.ping
 node2:
@@ -213,22 +213,25 @@ node3:
     True
 ```
 
-Test passed, time to try 25 boxes with 250MB ram:
+25 boxes with 250MB ram booted and controlled with salt:
 
 ![](http://blog.petrusmanner.com/wp-content/uploads/2018/12/Selection_001.png)
+
+## Final push
 
 Since we still have a fair amount RAM left to utilize, i decided to try 35 boxes:
 
 ![](http://blog.petrusmanner.com/wp-content/uploads/2018/12/Selection_003.png)
 
-The image clips a few of the minions, but all 35 nodes + master box are up, running, and controlled by salt. I then made a quick salt-module that copies a `hello.txt` file to every minion's `/tmp` folder:
+The image clips a few of the minions, but all 35 nodes + master box are up, running, and controlled by salt. I then made a quick salt-module that copies a `hello.txt` file to every minion's `/tmp` folder...
 ```
 /tmp/hello.txt
   file.managed:
     - source: salt://vagrant/hello.txt
 ```
 
-To futher illustrate the functionality of my minions, i created a for-loop to make every box `cat` their hostname and `hello.txt`:
+...And to futher illustrate the functionality of my minions, i created a for-loop to make every box `cat` their hostname and the aforementioned `hello.txt`:
+
 ```
 #!bin/bash
 
