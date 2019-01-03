@@ -246,12 +246,12 @@ echo "Script done."
 ```
 ![](http://blog.petrusmanner.com/wp-content/uploads/2018/12/Selection_008.png)
 
-## Conclusions and toughts
+## Conclusions and thoughts
 
 So there we go, **36 minions** controlled at the same, all housed on a single pc. 
 
 Overall this project was a lot of fun, and gave me some new insights on vagrant, salt and even bash-scripting. 
-I'm not sure if the provisioning tactic i used was any good, since each box took a rather long time to deploy. I could've probably ran even more boxes at once, but this is as far as i'll go for now.
+I'm not sure if the provisioning tactic i used was any the optimal way to go, since each box took a rather long time to deploy. Using type-1 virtualization would probably have yielded better results, but that is a project for another day.
 
 #### Sources
 - http://terokarvinen.com/2018/aikataulu--palvelinten-hallinta-ict4tn022-3004-ti-ja-30$
