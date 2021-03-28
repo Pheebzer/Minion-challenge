@@ -2,8 +2,6 @@
 
 This is my entry to the "most salt-minions controlled at one time"-challenge presented by [Tero Karvinen](http://terokarvinen.com), as a part of [this course.](http://terokarvinen.com/2018/aikataulu--palvelinten-hallinta-ict4tn022-3004-ti-ja-3002-to--loppukevat-2018-5p)
 
-Reports for other assignments on this course can be read at my blog.petrusmanner.com
-
 ## Tools and resources
 
 I housed all the VMs in my personal desktop running Xubuntu 18.04 x64, and ran salt-master from my virtual server running Ubuntu 18,04 x64.
